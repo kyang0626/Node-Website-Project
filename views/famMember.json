@@ -1,0 +1,13 @@
+{
+  "siblings": {
+    "firstSibling": {
+      "name": "John"
+    },
+    "secondSibling": {
+      "name": "David"
+    },
+    "thirdSibling": {
+      "name": "Lucy"
+    }
+  }
+}
