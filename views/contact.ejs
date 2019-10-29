@@ -11,7 +11,7 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-  </head>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <body>
     <%- include('header'); -%>
     <h1>Contact Me</h1>
@@ -19,13 +19,14 @@
       Please give me your name and email. I will reply to you as soon as
       possible.
     </h3>
-    <form>
+    <form action = "/contact" method = "POST">
       <div class="form-group">
         <label for="exampleInputEmail1">Full Name</label>
         <input
-          type="firstname"
+          type="name"
+          name="name"
           class="form-control"
-          id="firstname"
+          id="name"
           aria-describedby="emailHelp"
           placeholder="ex. John Doe"
         />
@@ -34,13 +35,28 @@
         <label for="exampleInputEmail1">Email address</label>
         <input
           type="email"
+          name="email"
           class="form-control"
-          id="exampleInputEmail1"
+          id="email"
           aria-describedby="emailHelp"
           placeholder="ex. jsmith45@yahoo.com"
         />
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button id="contact-btn" type="submit" class="btn btn-primary">
+        Submit
+      </button>
     </form>
+
+    <script>       
+      //$("#contact-btn").click(function () {
+      console.log('its working!!');
+      // $.ajax({
+      //   type: "POST",
+      //   url: "/contact",
+      //   data: JSON.stringify({name: FormData.name, email: FormData.email}),
+      //   dataType: "json",
+      //   contentType: "application/json" 
+      // });
+      //}); </script>
   </body>
 </html>

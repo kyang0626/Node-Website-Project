@@ -1,13 +1,14 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
 var port = process.env.PORT || 3000;
 
-app.use(bodyParser.urlencoded({ extended: false }));
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json();
 
 // ===============    Routes ===============
-app.use('/assets', express.static(__dirname + '/public'));
+app.use('/public', express.static(__dirname + '/public'));
 
 app.set('view engine', 'ejs');
 
@@ -32,12 +33,20 @@ app.get('family/:id', function (req, res) {
 app.get('/api', function (req, res) {
     req.json({ firstname: 'John', lastname: 'Doe' });
 })
-app.post('/person', urlencodedParser, function (req, res) {
-    res.send("Thank you!");
-    console.log(req, res, firstname);
-    console.log(req, res, lastname);
+// app.post('/person', urlencodedParser, function (req, res) {
+//     console.log('hello!');
+//     res.send("Thank you!");
+//     console.log(req, res, firstname);
+//     console.log(req, res, lastname);
+// })
+
+app.post("/contact", urlencodedParser, function (req, res) {
+    console.log(req.body.name);
+    console.log(req.body.email);
+
 })
 
-
 app.listen(port);
+
+// Logic
 
