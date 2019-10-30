@@ -1,23 +1,75 @@
 <html>
   <head>
-    
-    <title>Hobbies</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <%- include('header'); -%>
   </head>
   <body>
-    <%- include('header'); -%>
-    <h1>My Hobbies</h1>
-    <p>I have many but here are some of them:</p>
-    <ul>
-        <li>Gym</li>
-        <li>Sports</li>
-        <li>Music</li>
-        <li>Art</li>
-    </ul>
-    </p>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <%- include('nav'); -%>
+    <div class="aboutme">
+      <div id="ap1">
+        <h1>My Hobbies</h1>
+        <p>I have many but here are some of them:</p>
+        <ul>
+          <li>Sports</li>
+          <li>Music</li>
+          <li>Art</li>
+        </ul>
+      </div>
+      <div class="hobbies" id="h.sports">
+        <h3>Sports</h3>
+        <img
+          src="https://specials-images.forbesimg.com/imageserve/1173738825/960x0.jpg?fit=scale"
+          alt=""
+          style="height: 300px ; width: 300px"
+        />
+        <img
+          src="https://www.economist.com/sites/default/files/20180825_BLP501_0.jpg"
+          alt=""
+          style="height: 300px ; width: 300px"
+        />
+      </div>
+      <div class="hobbies" id="music">
+        <h3>Music</h3>
+        <img
+          src="https://guildguitars.com/wp-content/uploads/2016/08/d20_nat_side-845x321.jpg"
+          alt=""
+          style="height: 300px ; width: 300px"
+        />
+        <img
+          src="https://kawaius.com/wp-content/uploads/2018/04/Kawai-Novus-NV10.jpg"
+          alt=""
+          style="height: 300px ; width: 300px"
+        />
+        <img
+          src="https://image.redbull.com/rbcom/052/2017-10-12/65af13a0-e540-4ef2-a187-320ddb440447/0012/0/2/0/5147/7717/1500/1/dj-abstract.jpg"
+          alt=""
+          style="height: 300px ; width: 300px"
+        />
+      </div>
+      <div class="hobbies" id="h.art">
+        <h3>Art</h3>
+        <img
+          src="https://static.boredpanda.com/blog/wp-content/uploads/2017/02/IMG_20170205_220039_508-58a0129a23ada__880.jpg"
+          alt=""
+          style="height: 300px ; width: 300px"
+        />
+      </div>
+    </div>
+
+    <!-- Javascript -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

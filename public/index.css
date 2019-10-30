@@ -1,0 +1,75 @@
+html {
+  margin: 0;
+}
+body {
+  background: rgb(33, 31, 31);
+  color: rgb(227, 227, 227);
+  margin: 0;
+}
+
+#p1 {
+  height: 500px;
+  background-size: cover;
+  background: url("https://res.klook.com/image/upload/fl_lossy.progressive/q_auto/f_auto/c_fill/blogen/2018/08/image5-3.jpg");
+}
+#p2 {
+  height: 300px;
+}
+h1 {
+  margin: 50px 20px;
+}
+h3 {
+  margin: 40px;
+}
+nav {
+  height: 10% !important;
+}
+.bg-light {
+  background: rgb(48, 48, 48) !important;
+  width: 100%;
+}
+a {
+  color: rgb(255, 255, 255) !important;
+}
+.hobbies {
+  height: 500px;
+  background: white;
+  padding-top: 40px;
+  color: black;
+}
+#ap1 {
+  min-height: 400px;
+}
+#music {
+  background: rgb(34, 34, 34);
+  color: white;
+  min-height: 500px;
+}
+li {
+  list-style: none;
+  margin: 10px;
+}
+form {
+  margin: 0px 100px 0px 40px;
+}
+input#name {
+  width: 600px;
+}
+input#email {
+  width: 600px;
+}
+textarea {
+  height: 200px !important;
+  width: 600px !important;
+}
+.home {
+  text-align: center;
+}
+.aboutme {
+  text-align: center;
+  /* position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; */
+}

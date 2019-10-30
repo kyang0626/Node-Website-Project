@@ -1,13 +1,19 @@
 {
   "siblings": {
     "firstSibling": {
-      "name": "John"
+      "name": "John",
+      "age": "35",
+      "id": 1
     },
     "secondSibling": {
-      "name": "David"
+      "name": "David",
+      "age": "33",
+      "id": 2
     },
     "thirdSibling": {
-      "name": "Lucy"
+      "name": "Lucy",
+      "age": "28",
+      "id": 3
     }
   }
 }

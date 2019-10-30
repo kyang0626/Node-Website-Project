@@ -1,25 +1,26 @@
 <html>
   <head>
-    <title>My Webpage</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <style src=""></style>
+    <%- include('header'); -%>
   </head>
   <body>
-    <%- include('header'); -%>
-    <h1>Hi, welcome to my page.</h1>
-    <h3>About Me:</h3>
-    <p>
-      Hi, my name is Kong. I am 26 years old and from Conover, North Carolina.
-    </p>
-    <p>I am currently in a 6-weeks Hire-Train-Deploy program with Collabera.</p>
+    <%- include('nav'); -%>
+    <div class="home">
+      <div id="p1"></div>
+      <h1>Hi, welcome to my page.</h1>
+      <div id="p2">
+        <h3>About Me:</h3>
+        <p>
+          Hi, my name is Kong. I am 26 years old and from Conover, North
+          Carolina.
+        </p>
+        <p>
+          I am currently in a 6-weeks Hire-Train-Deploy program with Collabera
+          Inc.
+        </p>
+      </div>
+    </div>
 
-    // Bootstrap JS CDN
+    <!-- Bootstrap JS CDN -->
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
