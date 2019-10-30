@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('header'); -%>
+  </head>
+  <body>
+    <%- include('nav'); -%>
+    <div class="guestbook">
+      <h3>People and Comments:</h3>
+      <table>
+        <tr>
+          <th>Full Name:</th>
+          <th>Email:</th>
+          <th>Comment:</th>
+        </tr>
+        <% q_result.forEach(function(item, index){%>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.email %></td>
+          <td><%= item.comment %></td>
+        </tr>
+        <% }); %>
+      </table>
+    </div>
+  </body>
+</html>

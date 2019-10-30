@@ -12,12 +12,21 @@ var jsonParser = bodyParser.json();
 
 var sibling = require('./views/famMember.json');
 
+// MySql Connection
+var con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'guestbook_db'
+});
+
 // ===============    Routes ===============
 app.use('/public', express.static(__dirname + '/public'));
 
 
 app.set('view engine', 'ejs');
 
+// render pages
 app.get('/', function (req, res) {
     res.render('index');
 });
@@ -42,39 +51,32 @@ app.get('/family/:id', function (req, res) {
     res.json({ sibling: sibling.siblings.firstSibling });
     res.json({ sibling: sibling.siblings.secondSibling });
     res.json({ sibling: sibling.siblings.thirdSibling });
-
 });
 
+app.get('/guestbook', function (req, res) {
+    con.query("SELECT name, email, comment FROM people", function (err, result) {
+        if (err) throw err;
+        res.render('guestbook', { q_result: result });
+    });
 
-// app.post('/person', urlencodedParser, function (req, res) {
-//     console.log('hello!');
-//     res.send("Thank you!");
-//     console.log(req, res, firstname);
-//     console.log(req, res, lastname);
-// }
+})
+app.get('/success', function (req, res) {
+    res.render('success');
+    console.log(res);
+})
 
+
+
+// Submit Form
 app.post("/contact", urlencodedParser, function (req, res) {
     console.log(req.body.name);
     console.log(req.body.email);
     console.log(req.body.comment);
 
-
-    // MySql Connection
-    var con = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'root',
-        database: 'guestbook_db'
-    });
-
-    con.query('SELECT * FROM guestbook_db.people',
-        function (err, rows) {
-            if (err) {
-                res.status(500);
-                throw err
-            };
-        })
-
+    if (req.body.name == "" || !req.body.email || !req.body.comment) {
+        res.status(500);
+        res.render('error', 'form info is missing, submit name, email, and a comment');
+    }
 
     // Insert
     con.query("INSERT INTO people (name, email, comment) VALUES ('" + req.body.name + "', '" + req.body.email + "', '" + req.body.comment + "')", function (err, result) {
@@ -82,7 +84,10 @@ app.post("/contact", urlencodedParser, function (req, res) {
         console.log("1 record inserted");
     });
 
-})
+    res.redirect("success");
+
+});
+
 
 
 app.listen(port);
