@@ -11,6 +11,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json();
 
 var content = require('./content.json');
+// console.log(content);
 
 // MySql Connection
 var con = mysql.createConnection({
@@ -45,10 +46,11 @@ app.get('/contact', function (req, res) {
 
 // get JSON by params 
 app.get('/family/:id', function (req, res) {
-    console.log(res.body);
-    res.render('family', { family_member: content.family[req.body.id] });
+    //console.log(res.body);
+    res.render('family', { family_member: content.family[req.params.id] });
+    console.log(req.params.id);
     console.log(res);
-    res.json({ sibling: sibling.siblings.firstSibling });
+    // res.render({ sibling: req.params.id });
     // res.json({ sibling: sibling.siblings.secondSibling });
     // res.json({ sibling: sibling.siblings.thirdSibling });
 });
@@ -64,7 +66,6 @@ app.get('/success', function (req, res) {
     res.render('success');
     console.log(res);
 })
-
 
 
 // Submit Form
