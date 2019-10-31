@@ -46,14 +46,11 @@ app.get('/contact', function (req, res) {
 
 // get JSON by params 
 app.get('/family/:id', function (req, res) {
-    // res.render('family', { family_member: content.family[req.params.id] });
-
-    var family_member_info = content.family.siblings[req.params.id];
-    console.log(family_member_info);
-    res.render('familyMember', { name: req.params.id, familyMember: family_member_info, gender: family_member_info, occupation: family_member_info });
+    var family_member_info = [content];
+    // console.log(family_member_info);
+    res.render('familyMember', { name: req.params.id, familyMember: family_member_info, gender: family_member_info, occupation: family_member_info, pic: family_member_info });
 
 });
-
 
 app.get('/guestbook', function (req, res) {
     con.query("SELECT name, email, comment, time FROM people", function (err, result) {
@@ -67,7 +64,17 @@ app.get('/success', function (req, res) {
     console.log(res);
 })
 
+// api
+app.get('/api/', function (req, res) {
+    res.json(content);
+})
+app.get('/api/:id', function (req, res) {
+    var page = req.params.id;
+    console.log(req.params.id);
+    console.log(page);
+    res.json(content.page);
 
+})
 // Submit Form
 app.post("/contact", urlencodedParser, function (req, res) {
     console.log(req.body.name);

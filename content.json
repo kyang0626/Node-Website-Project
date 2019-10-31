@@ -1,4 +1,12 @@
 {
+  "aboutme": {
+    "me": {
+      "name": "Kong Yang",
+      "age": 26,
+      "field": "tech",
+      "pgm-lang": "python, c#, javascript"
+    }
+  },
   "family": {
     "siblings": {
       "John": {
