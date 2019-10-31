@@ -46,21 +46,21 @@ app.get('/contact', function (req, res) {
 
 // get JSON by params 
 app.get('/family/:id', function (req, res) {
-    res.render('family', { family_member: content.family[req.params.id] });
+    // res.render('family', { family_member: content.family[req.params.id] });
     console.log(req.params.id);
-    console.log(content.family.siblings[req.params.id]);
-    res.redirect("hello");
-    // res.json({ sibling: sibling.siblings.secondSibling });
-    // res.json({ sibling: sibling.siblings.thirdSibling });
+    var family_member_info = content.family.siblings[req.params.id];
+    res.render({ name: req.params.id, familyMember: family_member_info });
+
 });
+
 
 app.get('/guestbook', function (req, res) {
     con.query("SELECT name, email, comment, time FROM people", function (err, result) {
         if (err) throw err;
         res.render('guestbook', { q_result: result });
     });
-
 })
+
 app.get('/success', function (req, res) {
     res.render('success');
     console.log(res);
