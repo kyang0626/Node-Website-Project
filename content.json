@@ -1,18 +1,15 @@
 {
   "family": {
     "siblings": {
-      "firstSibling": {
-        "name": "John",
-        "age": "35",
+      "john": {
+        "age": "38",
         "id": 1
       },
-      "secondSibling": {
-        "name": "David",
+      "david": {
         "age": "33",
         "id": 2
       },
-      "thirdSibling": {
-        "name": "Lucy",
+      "lucy": {
         "age": "28",
         "id": 3
       }

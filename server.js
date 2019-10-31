@@ -46,11 +46,10 @@ app.get('/contact', function (req, res) {
 
 // get JSON by params 
 app.get('/family/:id', function (req, res) {
-    //console.log(res.body);
     res.render('family', { family_member: content.family[req.params.id] });
     console.log(req.params.id);
-    console.log(res);
-    // res.render({ sibling: req.params.id });
+    console.log(content.family.siblings[req.params.id]);
+    res.redirect("hello");
     // res.json({ sibling: sibling.siblings.secondSibling });
     // res.json({ sibling: sibling.siblings.thirdSibling });
 });
