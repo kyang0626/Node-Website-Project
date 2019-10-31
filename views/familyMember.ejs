@@ -6,8 +6,17 @@
   <body>
     <%- include('nav'); -%>
     <div class="guestbook">
-      <h3 style="text-align-last: center;"><%= familyMember.name %></h3>
-      Age: <%= familyMember.age %><
+      <h3 style="text-align-last: center;"><%= name %></h3>
+      <p>Age: <%= familyMember.age %></p>
+      <p>Gender: <%= familyMember.gender %></p>
     </div>
+
+    <a href="/family"
+      ><button
+        style="background: gray; border-color: white; ; position: relative; top: 80px; width: 120px;  margin: 0; color: white; font-size: 14px;"
+      >
+        Previous Page
+      </button></a
+    >
   </body>
 </html>

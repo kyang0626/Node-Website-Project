@@ -149,6 +149,15 @@ tr#footertr {
   font-size: 12px;
 }
 #footerth {
+  font-size: 14px;
+  padding: 20px 10;
+}
+#footerp {
   font-size: 12px;
-  padding-top: 40px;
+  padding: 0;
+  margin: 0;
+}
+#footertd {
+  margin: 0;
+  padding: 0;
 }

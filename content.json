@@ -1,16 +1,22 @@
 {
   "family": {
     "siblings": {
-      "john": {
+      "John": {
         "age": "38",
+        "gender": "Male",
+        "occupation": "Real-Estate Agent",
         "id": 1
       },
-      "david": {
+      "David": {
         "age": "33",
+        "gender": "Male",
+        "occupation": "Manufacturer Associate",
         "id": 2
       },
-      "lucy": {
+      "Lucy": {
         "age": "28",
+        "gender": "Female",
+        "occupation": "Nurse",
         "id": 3
       }
     }

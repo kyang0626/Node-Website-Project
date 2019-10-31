@@ -47,9 +47,10 @@ app.get('/contact', function (req, res) {
 // get JSON by params 
 app.get('/family/:id', function (req, res) {
     // res.render('family', { family_member: content.family[req.params.id] });
-    console.log(req.params.id);
+
     var family_member_info = content.family.siblings[req.params.id];
-    res.render({ name: req.params.id, familyMember: family_member_info });
+    console.log(family_member_info);
+    res.render('familyMember', { name: req.params.id, familyMember: family_member_info, gender: family_member_info });
 
 });
 
