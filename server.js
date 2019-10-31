@@ -50,7 +50,7 @@ app.get('/family/:id', function (req, res) {
 
     var family_member_info = content.family.siblings[req.params.id];
     console.log(family_member_info);
-    res.render('familyMember', { name: req.params.id, familyMember: family_member_info, gender: family_member_info });
+    res.render('familyMember', { name: req.params.id, familyMember: family_member_info, gender: family_member_info, occupation: family_member_info });
 
 });
 
