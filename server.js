@@ -10,7 +10,7 @@ var port = process.env.PORT || 3000;
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json();
 
-var sibling = require('./views/famMember.json');
+var content = require('./content.json');
 
 // MySql Connection
 var con = mysql.createConnection({
@@ -42,19 +42,19 @@ app.get('/contact', function (req, res) {
 app.get('/contact', function (req, res) {
     res.render('contact');
 })
-app.get('family/:id', function (req, res) {
-    res.render('person', { id: req.params.id });
-})
+
 // get JSON by params 
 app.get('/family/:id', function (req, res) {
-    console.log(req);
+    console.log(res.body);
+    res.render('family', { family_member: content.family[req.body.id] });
+    console.log(res);
     res.json({ sibling: sibling.siblings.firstSibling });
-    res.json({ sibling: sibling.siblings.secondSibling });
-    res.json({ sibling: sibling.siblings.thirdSibling });
+    // res.json({ sibling: sibling.siblings.secondSibling });
+    // res.json({ sibling: sibling.siblings.thirdSibling });
 });
 
 app.get('/guestbook', function (req, res) {
-    con.query("SELECT name, email, comment FROM people", function (err, result) {
+    con.query("SELECT name, email, comment, time FROM people", function (err, result) {
         if (err) throw err;
         res.render('guestbook', { q_result: result });
     });
@@ -72,6 +72,8 @@ app.post("/contact", urlencodedParser, function (req, res) {
     console.log(req.body.name);
     console.log(req.body.email);
     console.log(req.body.comment);
+    var timeSubmit = new Date().toLocaleTimeString();
+    console.log(timeSubmit);
 
     if (req.body.name == "" || !req.body.email || !req.body.comment) {
         res.status(500);
@@ -79,7 +81,7 @@ app.post("/contact", urlencodedParser, function (req, res) {
     }
 
     // Insert
-    con.query("INSERT INTO people (name, email, comment) VALUES ('" + req.body.name + "', '" + req.body.email + "', '" + req.body.comment + "')", function (err, result) {
+    con.query("INSERT INTO people (name, email, comment, time) VALUES ('" + req.body.name + "', '" + req.body.email + "', '" + req.body.comment + "', '" + timeSubmit + "')", function (err, result) {
         if (err) throw err;
         console.log("1 record inserted");
     });

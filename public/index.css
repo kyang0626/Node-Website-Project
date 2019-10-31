@@ -23,7 +23,7 @@ h1 {
 }
 h3,
 h4 {
-  margin: 40px;
+  margin: 40px 100px;
 }
 nav {
   height: 12% !important;
@@ -56,6 +56,10 @@ li {
   margin: 10px;
   font-size: 14px;
 }
+.nav-item:hover {
+  font-size: 16px;
+  letter-spacing: 2px;
+}
 form {
   margin: 0px 100px 0px 40px;
 }
@@ -81,6 +85,11 @@ textarea {
   background-attachment: fixed; */
   font-weight: 100;
 }
+.family {
+  background: rgb(19, 19, 19);
+  height: 100%;
+  padding: 10px 0;
+}
 .contact {
   background: rgb(19, 19, 19);
   padding: 20px 0;
@@ -94,5 +103,18 @@ textarea {
   font-size: 14px;
 }
 .guestbook {
-  margin: 0 40px;
+  background: rgb(19, 19, 19);
+  height: 100%;
+  padding: 10px 0 20px 20px;
+}
+
+th {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 20px;
+}
+td {
+  font-size: 14px;
+  font-weight: 200;
+  padding: 5px 10px;
 }
