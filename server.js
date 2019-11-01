@@ -46,6 +46,8 @@ MongoClient.connect(uri, function (err, client) {
 app.use('/public', express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
+app.use(fileUpload());
+
 // ===============    Routes ===============
 // render pages
 app.get('/', function (req, res) {
@@ -86,9 +88,9 @@ app.get('/guestbook', function (req, res) {
         cursor.each(function (err, doc) {
             console.log(resultArray);
             resultArray.push(doc);
-            res.render('guestbook', { q_result: resultArray })
-            db.close();
-        })
+            client.close();
+            res.render('guestbook', { q_result: resultArray });
+        });
     });
 });
 
@@ -110,32 +112,21 @@ app.get('/api/content/:id', function (req, res) {
 
 // Submit Form
 app.post("/contact", urlencodedParser, function (req, res) {
-    console.log(req.body.name);
-    console.log(req.body.email);
-    console.log(req.body.comment);
     var timeSubmit = new Date().toLocaleTimeString();
-    console.log(timeSubmit);
-    // if error
-    if (req.body.name == "" || !req.body.email || !req.body.comment) {
-        res.status(500);
-        res.render('error', 'form info is missing, submit name, email, and a comment');
-    }
+
     // ======= File Upload ============
-    // app.use(fileUpload());
-
-    // if (!req.files || Object.keys(req.files).length === 0) {
-    //     return res.status(400).send('No files were uploaded.');
-    // }
-    // // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-    // let sampleFile = req.files.sampleFile;
-
-    // // Use the mv() method to place the file somewhere on your server
-    // sampleFile.mv('/upload/filename.jpg', function (err) {
-    //     if (err)
-    //         return res.status(500).send(err);
-
-    //     res.send('File uploaded!');
-    // });
+    var imageFile = req.files.imageFile;
+    // Use the mv() method to place the file somewhere on your server
+    imageFile.mv('public/uploads/' + imageFile.name, function (err) {
+        if (err) {
+            // return res.status(500).send(err);
+            console.log('error');
+            console.log("Couldn't upload the image file.");
+        } else {
+            // res.send('File uploaded!');
+            console.log("Image file uploaded successfully.");
+        }
+    });
 
     MongoClient.connect(uri, function (err, client) {
         if (err) {
@@ -144,7 +135,7 @@ app.post("/contact", urlencodedParser, function (req, res) {
         console.log('MongoDB sucessfully connected!!.....');
         const collection = client.db("guestbook_db").collection("people");
         // perform actions on the collection object
-        var doc = { name: req.body.name, email: req.body.email, comment: req.body.comment };
+        var doc = { name: req.body.name, email: req.body.email, comment: req.body.comment, time: timeSubmit };
         collection.insertOne(doc, function (err, res) {
             if (err) throw err;
             console.log("Document inserted");
@@ -154,8 +145,6 @@ app.post("/contact", urlencodedParser, function (req, res) {
         });
         client.close();
     });
-
-
 
 
     res.redirect("success");

@@ -9,7 +9,7 @@
           Please give me your name, email and leave a comment down below. I will reply to you as soon as
           possible.
         </h4>
-        <form action = "/contact" method = "POST">
+        <form action = "/contact" method = "POST" enctype="multipart/form-data">
           <div class="form-group">
             <label id="nid" for="exampleInputEmail1">Full Name</label>
             <input
@@ -42,14 +42,10 @@
               required></textarea>  
           </div>
           <!-- ====== WORK ON THIS LATER!!! ======= -->
-          <!-- <form ref='uploadForm' 
-            id='uploadForm' 
-            action='http://localhost:3000/upload' 
-            method='post' 
-            encType="multipart/form-data">
-            <input type="file" name="sampleFile" />
-            <input type='submit' value='Upload!' />
-          </form>   -->
+          <div class="custom-file">
+            <label style="padding: 20px 0 10px 0; font-size: 14px;" for="imageInput">Upload Your Image Here:</label>
+            <input type="file" class="form-control-file" id="imageInput" name="imageFile">
+          </div>
           <button style="margin: 20px 0 0 40px;" id="contact-btn" type="submit" class="btn btn-primary">
             Submit
           </button>
