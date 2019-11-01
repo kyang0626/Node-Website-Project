@@ -1,14 +1,17 @@
 var express = require('express');
 var app = express();
-var router = express.Router();
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://yangk93:koobyaj828@cluster0-w1hli.mongodb.net/test?retryWrites=true&w=majority"
+const fileUpload = require('express-fileupload');
+
 var bodyParser = require('body-parser');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-router.get('/contact', function (req, res) {
-    // app.get('/contact', function (req, res) {
-    //     res.render('contact');
-    // })
+module.exports = function (app) {
+    app.get('/contact', function (req, res) {
+        res.render('contact');
+    })
     // Submit Form
     app.post("/contact", urlencodedParser, function (req, res) {
         var timeSubmit = new Date().toLocaleTimeString();
@@ -32,7 +35,7 @@ router.get('/contact', function (req, res) {
             client.close();
             // ======= File Upload ============
             var imageFile = req.files.imageFile;
-            console.log(imageFile);
+            // console.log(imageFile);
             // Use the mv() method to place the file somewhere on your server
             imageFile.mv('public/uploads/' + imageFile.name, function (err) {
                 if (err) {
@@ -49,6 +52,6 @@ router.get('/contact', function (req, res) {
         res.redirect("success");
 
     });
-})
+}
 
-module.exports = router;
+
