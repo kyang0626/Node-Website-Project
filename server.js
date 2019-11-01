@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var mysql = require('mysql');
+// var mysql = require('mysql');
 
 var port = process.env.PORT || 3000;
 
@@ -11,22 +11,38 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json();
 
 var content = require('./content.json');
-// console.log(content);
 
+// ******* No Longer Using MySql ************
 // MySql Connection
-var con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'guestbook_db'
+// var con = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'root',
+//     database: 'guestbook_db'
+// });
+// *********************************************
+
+// ========== MongoDB CONNECTION ===================
+
+const MongoClient = require('mongodb').MongoClient;
+
+// replace the uri string with your connection string.
+const uri = "mongodb + srv://yangk93:<koobyaj828>@cluster0-w1hli.mongodb.net/test?retryWrites=true&w=majority"
+MongoClient.connect(uri, function (err, client) {
+    if (err) {
+        console.log('Error occurred while connecting to MongoDB Atlas...\n', err);
+    }
+    console.log('Connected...');
+    const collection = client.db("test").collection("devices");
+    // perform actions on the collection object
+    client.close();
 });
 
-// ===============    Routes ===============
+
 app.use('/public', express.static(__dirname + '/public'));
-
-
 app.set('view engine', 'ejs');
 
+// ===============    Routes ===============
 // render pages
 app.get('/', function (req, res) {
     res.render('index');
@@ -43,13 +59,11 @@ app.get('/contact', function (req, res) {
 app.get('/contact', function (req, res) {
     res.render('contact');
 })
-
 // get JSON by params 
 app.get('/family/:id', function (req, res) {
-    var family_member_info = [content];
-    // console.log(family_member_info);
-    res.render('familyMember', { name: req.params.id, familyMember: family_member_info, gender: family_member_info, occupation: family_member_info, pic: family_member_info });
-
+    var family_member_info = content.family.siblings[req.params.id];
+    console.log(family_member_info);
+    res.render('familyMember', { name: req.params.id, familyMember: family_member_info });
 });
 
 app.get('/guestbook', function (req, res) {
@@ -65,16 +79,16 @@ app.get('/success', function (req, res) {
 })
 
 // api
-app.get('/api/', function (req, res) {
+app.get('/api/content', function (req, res) {
     res.json(content);
 })
-app.get('/api/:id', function (req, res) {
-    var page = req.params.id;
+app.get('/api/content/:id', function (req, res) {
+    var page = [content]
     console.log(req.params.id);
-    console.log(page);
-    res.json(content.page);
+    res.json(req.params.id)
 
 })
+
 // Submit Form
 app.post("/contact", urlencodedParser, function (req, res) {
     console.log(req.body.name);
@@ -82,12 +96,11 @@ app.post("/contact", urlencodedParser, function (req, res) {
     console.log(req.body.comment);
     var timeSubmit = new Date().toLocaleTimeString();
     console.log(timeSubmit);
-
+    // if error
     if (req.body.name == "" || !req.body.email || !req.body.comment) {
         res.status(500);
         res.render('error', 'form info is missing, submit name, email, and a comment');
     }
-
     // Insert
     con.query("INSERT INTO people (name, email, comment, time) VALUES ('" + req.body.name + "', '" + req.body.email + "', '" + req.body.comment + "', '" + timeSubmit + "')", function (err, result) {
         if (err) throw err;
@@ -98,7 +111,7 @@ app.post("/contact", urlencodedParser, function (req, res) {
 
 });
 
+// mongoconnection = mongodb+srv://yangk93:<password>@cluster0-w1hli.mongodb.net/test?retryWrites=true&w=majority
 
 
 app.listen(port);
-

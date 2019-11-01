@@ -1,31 +1,35 @@
 {
-  "aboutme": {
+  "myinfo": {
     "me": {
       "name": "Kong Yang",
       "age": 26,
       "field": "tech",
-      "pgm-lang": "python, c#, javascript"
+      "school": "UNCG"
+    }
+  },
+  "aboutme": {
+    "hobbies": {
+      "sports": "soccer, tennis",
+      "music": "guitar, piano, dj",
+      "art": "draw"
     }
   },
   "family": {
     "siblings": {
       "John": {
-        "age": "38",
+        "age": 38,
         "gender": "Male",
-        "occupation": "Real-Estate Agent",
-        "id": 1
+        "occupation": "Real-Estate Agent"
       },
       "David": {
-        "age": "33",
+        "age": 33,
         "gender": "Male",
-        "occupation": "Manufacturer Associate",
-        "id": 2
+        "occupation": "Manufacturer Associate"
       },
       "Lucy": {
-        "age": "28",
+        "age": 28,
         "gender": "Female",
-        "occupation": "Nurse",
-        "id": 3
+        "occupation": "Nurse"
       }
     }
   }
