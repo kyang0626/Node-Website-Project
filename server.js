@@ -33,8 +33,7 @@ MongoClient.connect(uri, function (err, client) {
         console.log('Error occurred while connecting to MongoDB Atlas...\n', err);
     }
     console.log('MongoDB sucessfully connected!!.....');
-    const collection = client.db("test").collection("devices");
-
+    const collection = client.db("guestbook_db").collection("people");
     // perform actions on the collection object
     client.close();
 });
@@ -104,7 +103,7 @@ app.post("/contact", urlencodedParser, function (req, res) {
     }
     // Insert
     var doc = { name: req.body.name, email: req.body.email, comment: req.body.comment };
-    db.collection("guestbook_db").insertOne(doc, function (err, res) {
+    db.collection("people").insertOne(doc, function (err, res) {
         if (err) throw err;
         console.log("Document inserted");
         // close the connection to db when you are done with it
