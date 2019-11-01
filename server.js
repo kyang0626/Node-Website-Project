@@ -27,13 +27,14 @@ var content = require('./content.json');
 const MongoClient = require('mongodb').MongoClient;
 
 // replace the uri string with your connection string.
-const uri = "mongodb + srv://yangk93:<koobyaj828>@cluster0-w1hli.mongodb.net/test?retryWrites=true&w=majority"
+const uri = "mongodb+srv://yangk93:koobyaj828@cluster0-w1hli.mongodb.net/test?retryWrites=true&w=majority"
 MongoClient.connect(uri, function (err, client) {
     if (err) {
         console.log('Error occurred while connecting to MongoDB Atlas...\n', err);
     }
-    console.log('Connected...');
+    console.log('MongoDB sucessfully connected!!.....');
     const collection = client.db("test").collection("devices");
+
     // perform actions on the collection object
     client.close();
 });
@@ -102,9 +103,12 @@ app.post("/contact", urlencodedParser, function (req, res) {
         res.render('error', 'form info is missing, submit name, email, and a comment');
     }
     // Insert
-    con.query("INSERT INTO people (name, email, comment, time) VALUES ('" + req.body.name + "', '" + req.body.email + "', '" + req.body.comment + "', '" + timeSubmit + "')", function (err, result) {
+    var doc = { name: req.body.name, email: req.body.email, comment: req.body.comment };
+    db.collection("guestbook_db").insertOne(doc, function (err, res) {
         if (err) throw err;
-        console.log("1 record inserted");
+        console.log("Document inserted");
+        // close the connection to db when you are done with it
+        db.close();
     });
 
     res.redirect("success");
