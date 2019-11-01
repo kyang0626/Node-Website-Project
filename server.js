@@ -12,6 +12,10 @@ var jsonParser = bodyParser.json();
 
 var content = require('./content.json');
 
+const fileUpload = require('express-fileupload');
+
+app.use(fileUpload());
+
 // ******* No Longer Using MySql ************
 // MySql Connection
 // var con = mysql.createConnection({
@@ -67,11 +71,26 @@ app.get('/family/:id', function (req, res) {
 });
 
 app.get('/guestbook', function (req, res) {
-    con.query("SELECT name, email, comment, time FROM people", function (err, result) {
-        if (err) throw err;
-        res.render('guestbook', { q_result: result });
+    var resultArray = [];
+    const MongoClient = require('mongodb').MongoClient;
+
+    // replace the uri string with your connection string.
+    const uri = "mongodb+srv://yangk93:koobyaj828@cluster0-w1hli.mongodb.net/test?retryWrites=true&w=majority"
+    MongoClient.connect(uri, function (err, client) {
+        if (err) {
+            console.log('Error occurred while connecting to MongoDB Atlas...\n', err);
+        }
+        console.log('MongoDB sucessfully connected!!.....');
+        const collection = client.db("guestbook_db").collection("people");
+        var cursor = collection.find();
+        cursor.each(function (err, doc) {
+            console.log(resultArray);
+            resultArray.push(doc);
+            res.render('guestbook', { q_result: resultArray })
+            db.close();
+        })
     });
-})
+});
 
 app.get('/success', function (req, res) {
     res.render('success');
@@ -101,14 +120,43 @@ app.post("/contact", urlencodedParser, function (req, res) {
         res.status(500);
         res.render('error', 'form info is missing, submit name, email, and a comment');
     }
-    // Insert
-    var doc = { name: req.body.name, email: req.body.email, comment: req.body.comment };
-    db.collection("people").insertOne(doc, function (err, res) {
-        if (err) throw err;
-        console.log("Document inserted");
-        // close the connection to db when you are done with it
-        db.close();
+    // ======= File Upload ============
+    // app.use(fileUpload());
+
+    // if (!req.files || Object.keys(req.files).length === 0) {
+    //     return res.status(400).send('No files were uploaded.');
+    // }
+    // // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    // let sampleFile = req.files.sampleFile;
+
+    // // Use the mv() method to place the file somewhere on your server
+    // sampleFile.mv('/upload/filename.jpg', function (err) {
+    //     if (err)
+    //         return res.status(500).send(err);
+
+    //     res.send('File uploaded!');
+    // });
+
+    MongoClient.connect(uri, function (err, client) {
+        if (err) {
+            console.log('Error occurred while connecting to MongoDB Atlas...\n', err);
+        }
+        console.log('MongoDB sucessfully connected!!.....');
+        const collection = client.db("guestbook_db").collection("people");
+        // perform actions on the collection object
+        var doc = { name: req.body.name, email: req.body.email, comment: req.body.comment };
+        collection.insertOne(doc, function (err, res) {
+            if (err) throw err;
+            console.log("Document inserted");
+            console.log(doc);
+            // close the connection to db when you are done with it
+            // db.close();
+        });
+        client.close();
     });
+
+
+
 
     res.redirect("success");
 
